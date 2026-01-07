@@ -39,8 +39,16 @@ func main() {
 }
 
 func proxyHandler(w http.ResponseWriter, r *http.Request) {
-	// add cors header to allow any browser to use this endpoint
+	// add cors headers to allow any browser to use this endpoint
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+
+	if r.Method == http.MethodOptions {
+		// this prevents the 405 from e.g. GitHub
+		w.WriteHeader(http.StatusOK)
+		return
+	}
 
 	// get the destination url from query
 	destUrlQuery := r.URL.Query().Get("url")
