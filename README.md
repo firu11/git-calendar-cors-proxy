@@ -15,7 +15,7 @@ Access to fetch at 'https://example.com' from origin 'https://...' has been bloc
 
 ---
 
-HTTP request to this proxy:
+HTTP request through this proxy:
 
 ```js
 const response = await fetch("http://localhost:8000/?url=https://example.com");
